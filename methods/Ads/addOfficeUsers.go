@@ -21,14 +21,14 @@ type AddOfficeUserSpecification struct {
 }
 
 // AddOfficeAddAdminsRequest структура для передачи в функцию
-type AddOfficeAddAdminsRequest struct {
-	UserSpecifications []AddOfficeUserSpecification `json:"user_specification"`
+type AddOfficeUserRequest struct {
+	AddOfficeUserSpecification []AddOfficeUserSpecification `json:"user_specification"`
 }
 
 // AddOfficeUsersSerialize сериализует массив AddOfficeUserSpecification в JSON
-func AddOfficeUsersSerialize(admins []AddOfficeUserSpecification) (string, error) {
-	request := AddOfficeAddAdminsRequest{
-		UserSpecifications: admins,
+func AddOfficeUsersSerialize(AddOfficeUserSpecification []AddOfficeUserSpecification) (string, error) {
+	request := AddOfficeUserRequest{
+		AddOfficeUserSpecification: AddOfficeUserSpecification,
 	}
 
 	jsonData, err := json.Marshal(request)

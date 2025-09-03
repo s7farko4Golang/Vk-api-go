@@ -188,13 +188,13 @@ type CreateAdsSpecification struct {
 
 // CreateAdsRequest структура для передачи в функцию
 type CreateAdsRequest struct {
-	CreateAdsSpecification []CreateAdsSpecification `json:"ads_specification"`
+	CreateAdsSpecification []CreateAdsSpecification `json:"ad_specification"`
 }
 
 // CreateAdsSerialize сериализует массив CreateAdsSpecification в JSON
-func CreateAdsSerialize(data []CreateAdsSpecification) (string, error) {
+func CreateAdsSerialize(CreateAdsSpecification []CreateAdsSpecification) (string, error) {
 	request := CreateAdsRequest{
-		CreateAdsSpecification: data,
+		CreateAdsSpecification: CreateAdsSpecification,
 	}
 
 	jsonData, err := json.Marshal(request)
