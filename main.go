@@ -2,8 +2,8 @@ package main
 
 import (
 	"Vk-api-go/account"
-	client "Vk-api-go/client"
-	config "Vk-api-go/config"
+	"Vk-api-go/client"
+	"Vk-api-go/config"
 	"Vk-api-go/session"
 	"context"
 	"fmt"
@@ -11,7 +11,6 @@ import (
 )
 
 func main() {
-
 	vkConfig, err := config.LoadConfigFromEnv()
 	if err != nil {
 		log.Fatal(err)
@@ -22,7 +21,7 @@ func main() {
 
 	ctx := context.Background()
 
-	vkResponse, err := vkSession.Account.SetInfo(ctx)
+	vkResponse, err := vkSession.Ads.CreateAds(ctx, 123412, "data")
 	if err != nil {
 		log.Fatal(err)
 	}
