@@ -27,7 +27,6 @@ func (m *APIMethods) Call(ctx context.Context, request types.VkRequest) (types.V
 	baseURL := fmt.Sprintf("%s%s", m.client.BaseUrl, request.Method)
 
 	params := request.Params
-	fmt.Print(params)
 	// Добавляем обязательные параметры
 	params.Set("access_token", m.account.AccessToken)
 	params.Set("v", "5.199") // версия API

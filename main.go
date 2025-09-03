@@ -12,17 +12,17 @@ import (
 
 func main() {
 
-	config, err := config.LoadConfigFromEnv()
+	vkConfig, err := config.LoadConfigFromEnv()
 	if err != nil {
 		log.Fatal(err)
 	}
-	client := client.NewClient()
+	vkClient := client.NewClient()
 
-	session := session.NewSession(client, account.NewVkAccount(config.PrimaryAccount.AccessToken, config.PrimaryAccount.UserID))
+	vkSession := session.NewSession(vkClient, account.NewVkAccount(vkConfig.PrimaryAccount.AccessToken, vkConfig.PrimaryAccount.UserID))
 
 	ctx := context.Background()
 
-	vkResponse, err := session.Account.Ban(ctx, "649194831")
+	vkResponse, err := vkSession.Account.SetInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
