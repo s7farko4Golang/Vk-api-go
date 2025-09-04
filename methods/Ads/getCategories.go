@@ -7,7 +7,7 @@ import (
 )
 
 type GetCategoriesOptions struct {
-	lang string
+	lang string //Язык, на котором нужно вернуть результаты.
 }
 
 type GetCategoriesOption func(*GetCategoriesOptions)
