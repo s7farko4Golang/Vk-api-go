@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-type GetAdsOptions struct {
+type GetAdsLayoutOptions struct {
 	accountId      int  //Идентификатор рекламного кабинета.
 	clientId       int  //Для рекламных агентств. Идентификатор клиента, у которого запрашиваются рекламные объявления.
 	includeDeleted bool //Флаг, задающий необходимость вывода архивных объявлений.
@@ -22,56 +22,56 @@ type GetAdsOptions struct {
 	// Используется, только если параметр ad_ids равен null, а параметр campaign_ids содержит ID только одной кампании.
 	offset int //Смещение. Используется в тех же случаях, что и параметр limit.
 }
-type GetAdsOption func(*GetAdsOptions)
+type GetAdsLayoutOption func(*GetAdsLayoutOptions)
 
-func GetAdsWithClientId(clientId int) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithClientId(clientId int) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.clientId = clientId
 	}
 }
 
-func GetAdsWithIncludeDeleted(includeDeleted bool) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithIncludeDeleted(includeDeleted bool) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.includeDeleted = includeDeleted
 	}
 }
 
-func GetAdsWithOnlyDeleted(onlyDeleted bool) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithOnlyDeleted(onlyDeleted bool) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.onlyDeleted = onlyDeleted
 	}
 }
 
-func GetAdsWithCampaignIds(campaignIds string) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithCampaignIds(campaignIds string) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.campaignIds = campaignIds
 	}
 }
 
-func GetAdsWithAdIds(adIds string) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithAdIds(adIds string) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.adIds = adIds
 	}
 }
 
-func GetAdsWithLimit(limit int) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithLimit(limit int) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.limit = limit
 	}
 }
 
-func GetAdsWithOffset(offset int) GetAdsOption {
-	return func(o *GetAdsOptions) {
+func GetAdsLayoutWithOffset(offset int) GetAdsLayoutOption {
+	return func(o *GetAdsLayoutOptions) {
 		o.offset = offset
 	}
 }
 
-// GetAds Возвращает список рекламных объявлений.
+// GetAdsLayout Возвращает описания внешнего вида рекламных объявлений.
 // Для вызова метода можно использовать:
 // •ключ доступа пользователя (требуются права доступа: ads)
-func (am *AddMethods) GetAds(ctx context.Context, accountID int, opts ...GetAdsOption) (types.VkResponse, error) {
+func (am *AddMethods) GetAdsLayout(ctx context.Context, accountID int, opts ...GetAdsLayoutOption) (types.VkResponse, error) {
 
-	options := &GetAdsOptions{
+	options := &GetAdsLayoutOptions{
 		accountId: accountID,
 	}
 
@@ -105,7 +105,7 @@ func (am *AddMethods) GetAds(ctx context.Context, accountID int, opts ...GetAdsO
 	}
 
 	VkRequest := types.VkRequest{
-		Method: "ads.getAds",
+		Method: "ads.getAdsLayout",
 		Params: params,
 	}
 	return am.methods.Call(ctx, VkRequest)
