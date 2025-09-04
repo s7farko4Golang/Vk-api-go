@@ -28,7 +28,9 @@ func GetTargetGroupsWithExtended(extended bool) GetTargetGroupsOption {
 	}
 }
 
-// getTargetGroups
+// GetTargetGroups Возвращает список аудиторий ретаргетинга.
+// Для вызова метода можно использовать:
+// •ключ доступа пользователя (требуются права доступа: ads)
 func (am *AddMethods) GetTargetGroups(ctx context.Context, accountId int, opts ...GetTargetGroupsOption) (types.VkResponse, error) {
 
 	options := &GetTargetGroupsOptions{}
