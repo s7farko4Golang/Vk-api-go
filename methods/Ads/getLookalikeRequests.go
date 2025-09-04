@@ -52,7 +52,9 @@ func GetLookalikeRequestsWithSortBy(sortBy string) GetLookalikeRequestsOption {
 	}
 }
 
-// getLookalikeRequests
+// GetLookalikeRequests Возвращает список запросов на поиск похожей аудитории.
+// Для вызова метода можно использовать:
+// •ключ доступа пользователя (требуются права доступа: ads)
 func (am *AddMethods) GetLookalikeRequests(ctx context.Context, opts ...GetLookalikeRequestsOption) (types.VkResponse, error) {
 
 	options := &GetLookalikeRequestsOptions{}
