@@ -81,7 +81,9 @@ func GetSuggestionsWithLang(lang string) GetSuggestionsOption {
 	}
 }
 
-// getSuggestions
+// GetSuggestions Возвращает список аудиторий ретаргетинга.
+// Для вызова метода можно использовать:
+// •ключ доступа пользователя (требуются права доступа: ads)
 func (am *AddMethods) GetSuggestions(ctx context.Context, section string, opts ...GetSuggestionsOption) (types.VkResponse, error) {
 
 	options := &GetSuggestionsOptions{}
