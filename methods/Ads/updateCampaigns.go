@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-// CreateCampaignsSpecification описывает структуру администратора
-type CreateCampaignsSpecification struct {
+// UpdateCampaignsSpecification описывает структуру администратора
+type UpdateCampaignsSpecification struct {
 	ClientId    int    `json:"client_id"` //Только для рекламных агентств. id клиента, в рекламном кабинете которого будет создаваться кампания.
 	CompanyType string `json:"type"`      //Тип кампании:
 	//normal — обычная кампания, в которой можно создавать любые объявления, кроме описанных в следующих пунктах;
@@ -24,15 +24,15 @@ type CreateCampaignsSpecification struct {
 	Status    bool   `json:"status"`     //Статус рекламной кампании (1 — запущена, 0 — остановлена).
 }
 
-// CreateCampaignsRequest структура для передачи в функцию
-type CreateCampaignsRequest struct {
-	CreateCampaignsSpecification []CreateCampaignsSpecification `json:"campaign_specification"`
+// UpdateCampaignsRequest структура для передачи в функцию
+type UpdateCampaignsRequest struct {
+	UpdateCampaignsSpecification []UpdateCampaignsSpecification `json:"campaign_specification"`
 }
 
-// CreateCampaignsSerialize сериализует массив CreateCampaignsSpecification в JSON
-func CreateCampaignsSerialize(CreateCampaignsSpecification []CreateCampaignsSpecification) (string, error) {
-	request := CreateCampaignsRequest{
-		CreateCampaignsSpecification: CreateCampaignsSpecification,
+// UpdateCampaignsSerialize сериализует массив UpdateCampaignsSpecification в JSON
+func UpdateCampaignsSerialize(UpdateCampaignsSpecification []UpdateCampaignsSpecification) (string, error) {
+	request := UpdateCampaignsRequest{
+		UpdateCampaignsSpecification: UpdateCampaignsSpecification,
 	}
 
 	jsonData, err := json.Marshal(request)
@@ -43,15 +43,15 @@ func CreateCampaignsSerialize(CreateCampaignsSpecification []CreateCampaignsSpec
 	return string(jsonData), nil
 }
 
-// CreateCampaigns Создает рекламные кампании.
+// UpdateCampaigns Создает рекламные кампании.
 // Для вызова метода можно использовать:
 // •ключ доступа пользователя (требуются права доступа: ads)
-func (am *AddMethods) CreateCampaigns(ctx context.Context, accountID int, data string) (types.VkResponse, error) {
+func (am *AddMethods) UpdateCampaigns(ctx context.Context, accountID int, data string) (types.VkResponse, error) {
 	params := url.Values{}
 	params.Set("account_id", strconv.Itoa(accountID))
 	params.Set("data", data)
 	VkRequest := types.VkRequest{
-		Method: "ads.createCampaigns",
+		Method: "ads.updateCampaigns",
 		Params: params,
 	}
 	return am.methods.Call(ctx, VkRequest)
