@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-// CreateAdsTargeting Описывает структуру таргетинга
-type CreateAdsTargeting struct {
+// UpdateAdsTargeting Описывает структуру таргетинга
+type UpdateAdsTargeting struct {
 	Sex int32 `json:"sex"` //Пол. Возможные значения:
 	//0 — любой.
 	//1 — женский.
@@ -96,8 +96,8 @@ type CreateAdsTargeting struct {
 	UniTo      int `json:"uni_to"`      //Верхняя граница года окончания вуза (0 — не задано).
 }
 
-// CreateAdsSpecification описывает структуру рекламного объявления
-type CreateAdsSpecification struct {
+// UpdateAdsSpecification описывает структуру рекламного объявления
+type UpdateAdsSpecification struct {
 	CampaignId int `json:"campaign_id"` //Идентификатор кампании, в которой будет создаваться объявление.
 	AdFormat   int `json:"ad_format"`   //Формат объявления:
 	//1 — изображение и текст.
@@ -183,18 +183,18 @@ type CreateAdsSpecification struct {
 	WeeklyScheduleUseHolidays bool               `json:"weekly_schedule_use_holidays"` //Флаг, может принимать значения 0 или 1. Использовать ли расписание воскресенья в праздничные дни.
 	StatsUrl                  string             `json:"stats_url"`                    //Пиксель внешней статистики. Доступно в избранных кабинетах.
 	StatsUrl2                 string             `json:"stats_url2"`                   //Дополнительный пиксель внешней статистики. Доступно в избранных кабинетах.
-	TargetingConfig           CreateAdsTargeting `json:"targeting_config"`             //Набор полей, соответствующих настройкам таргетинга.
+	TargetingConfig           UpdateAdsTargeting `json:"targeting_config"`             //Набор полей, соответствующих настройкам таргетинга.
 }
 
-// CreateAdsRequest структура для передачи в функцию
-type CreateAdsRequest struct {
-	CreateAdsSpecification []CreateAdsSpecification `json:"ad_specification"`
+// UpdateAdsRequest структура для передачи в функцию
+type UpdateAdsRequest struct {
+	UpdateAdsSpecification []UpdateAdsSpecification `json:"ad_specification"`
 }
 
-// CreateAdsSerialize сериализует массив CreateAdsSpecification в JSON
-func CreateAdsSerialize(CreateAdsSpecification []CreateAdsSpecification) (string, error) {
-	request := CreateAdsRequest{
-		CreateAdsSpecification: CreateAdsSpecification,
+// UpdateAdsSerialize сериализует массив UpdateAdsSpecification в JSON
+func UpdateAdsSerialize(UpdateAdsSpecification []UpdateAdsSpecification) (string, error) {
+	request := UpdateAdsRequest{
+		UpdateAdsSpecification: UpdateAdsSpecification,
 	}
 
 	jsonData, err := json.Marshal(request)
@@ -205,17 +205,17 @@ func CreateAdsSerialize(CreateAdsSpecification []CreateAdsSpecification) (string
 	return string(jsonData), nil
 }
 
-// CreateAds Создает рекламные объявления.
+// UpdateAds Редактирует рекламные объявления.
 // Для вызова метода можно использовать:
 // •ключ доступа пользователя (требуются права доступа: ads)
-func (am *AddMethods) CreateAds(ctx context.Context, accountID int, data string) (types.VkResponse, error) {
+func (am *AddMethods) UpdateAds(ctx context.Context, accountID int, data string) (types.VkResponse, error) {
 	params := url.Values{}
 	params.Set("account_id", strconv.Itoa(accountID))
 	params.Set("data", data)
 	VkRequest := types.VkRequest{
-		Method: "ads.createAds",
+		Method: "ads.updateAds",
 		Params: params,
 	}
-
+	fmt.Println(VkRequest.Params)
 	return am.methods.Call(ctx, VkRequest)
 }
