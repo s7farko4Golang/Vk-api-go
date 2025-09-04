@@ -16,11 +16,11 @@ type CheckLinkOptions struct {
 	//video — видеозапись;
 	//site — внешний сайт.
 	linkUrl    string //Ссылка на рекламируемый объект.
-	campaignId string //Id кампании, в которой будет создаваться объявление.
+	campaignId int    //Id кампании, в которой будет создаваться объявление.
 }
 type CheckLinkOption func(*CheckLinkOptions)
 
-func GetBannedWithOffset(campaignId string) CheckLinkOption {
+func CheckLinkWithCampaignId(campaignId int) CheckLinkOption {
 	return func(o *CheckLinkOptions) {
 		o.campaignId = campaignId
 	}
@@ -45,8 +45,8 @@ func (am *AddMethods) CheckLink(ctx context.Context, accountID int, linkType str
 	params.Set("account_id", strconv.Itoa(options.accountId))
 	params.Set("link_type", options.linkType)
 	params.Set("link_url", options.linkUrl)
-	if options.campaignId != "" {
-		params.Set("campaign_id", options.campaignId)
+	if options.campaignId != 0 {
+		params.Set("campaign_id", strconv.Itoa(options.campaignId))
 	}
 
 	VkRequest := types.VkRequest{
