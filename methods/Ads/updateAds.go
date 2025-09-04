@@ -98,6 +98,7 @@ type UpdateAdsTargeting struct {
 
 // UpdateAdsSpecification описывает структуру рекламного объявления
 type UpdateAdsSpecification struct {
+	AdID       int `json:"ad_id"`       //Идентификатор рекламного кабинета.
 	CampaignId int `json:"campaign_id"` //Идентификатор кампании, в которой будет создаваться объявление.
 	AdFormat   int `json:"ad_format"`   //Формат объявления:
 	//1 — изображение и текст.
