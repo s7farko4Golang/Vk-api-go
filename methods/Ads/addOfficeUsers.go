@@ -20,7 +20,7 @@ type AddOfficeUserSpecification struct {
 	ViewBudget int `json:"view_budget,omitempty"` // Показывать ли бюджет пользователю. Необязательный параметр, [1, 0].
 }
 
-// AddOfficeAddAdminsRequest структура для передачи в функцию
+// AddOfficeUserRequest структура для передачи в функцию
 type AddOfficeUserRequest struct {
 	AddOfficeUserSpecification []AddOfficeUserSpecification `json:"user_specification"`
 }
