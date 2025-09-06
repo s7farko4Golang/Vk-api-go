@@ -6,6 +6,6 @@ type AddMethods struct {
 	methods *methods.APIMethods
 }
 
-func NewAccountMethods(m *methods.APIMethods) *AddMethods {
+func NewAddMethods(m *methods.APIMethods) *AddMethods {
 	return &AddMethods{methods: m}
 }
