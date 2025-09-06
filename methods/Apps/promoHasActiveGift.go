@@ -14,9 +14,9 @@ type PromoHasActiveGiftOptions struct {
 
 type PromoHasActiveGiftOption func(*PromoHasActiveGiftOptions)
 
-func PromoHasActiveGiftWithPromoId(promoId uint) PromoHasActiveGiftOption {
+func PromoHasActiveGiftWithUserId(userId uint) PromoHasActiveGiftOption {
 	return func(o *PromoHasActiveGiftOptions) {
-		o.promoId = promoId
+		o.userId = userId
 	}
 }
 
