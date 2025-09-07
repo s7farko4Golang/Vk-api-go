@@ -55,7 +55,7 @@ func (am *BoardMethods) AddTopic(ctx context.Context, groupId string, title stri
 
 	params := url.Values{}
 	params.Set("group_id", groupId)
-	params.Set("title", options.title)
+	params.Set("title", title)
 	// Add parameters to values based on options
 	if options.text != "" {
 		params.Set("text", options.text)
