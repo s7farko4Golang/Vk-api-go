@@ -8,6 +8,7 @@ import (
 	"Vk-api-go/methods/Ads"
 	apps "Vk-api-go/methods/Apps"
 	"Vk-api-go/methods/Auth"
+	"Vk-api-go/methods/Board"
 )
 
 type VkSession struct {
@@ -18,6 +19,7 @@ type VkSession struct {
 	Ads     *Ads.AddMethods
 	Apps    *apps.AppMethods
 	Auth    *Auth.AuthMethods
+	Board   *Board.BoardMethods
 }
 
 func NewSession(client *client.Client, vkAccount *account.VkAccount) *VkSession {
@@ -31,5 +33,6 @@ func NewSession(client *client.Client, vkAccount *account.VkAccount) *VkSession 
 		Ads:     Ads.NewAddMethods(apiMethods),
 		Apps:    apps.NewAppMethods(apiMethods),
 		Auth:    Auth.NewAuthMethods(apiMethods),
+		Board:   Board.NewBoardMethods(apiMethods),
 	}
 }
