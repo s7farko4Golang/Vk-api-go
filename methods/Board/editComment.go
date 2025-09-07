@@ -41,7 +41,7 @@ func EditCommentWithAttachments(attachments string) EditCommentOption {
 // EditComment Редактирует одно из сообщений в обсуждении сообщества.
 // Для вызова метода можно использовать:
 // •ключ доступа пользователя, полученный в Standalone‑приложении через Implicit Flow (требуются права доступа: groups)
-func (am *BoardMethods) EditComment(ctx context.Context, groupId uint, topicId uint, commentId string, opts ...EditCommentOption) (types.VkResponse, error) {
+func (am *BoardMethods) EditComment(ctx context.Context, groupId uint, topicId uint, commentId uint, opts ...EditCommentOption) (types.VkResponse, error) {
 
 	options := &EditCommentOptions{}
 
@@ -52,8 +52,8 @@ func (am *BoardMethods) EditComment(ctx context.Context, groupId uint, topicId u
 	params := url.Values{}
 	params.Set("group_id", strconv.Itoa(int(groupId)))
 	params.Set("topic_id", strconv.Itoa(int(topicId)))
-	params.Set("comment_id", commentId)
-	// Add parameters to values based on options
+	params.Set("comment_id", strconv.Itoa(int(commentId)))
+
 	if options.message != "" {
 		params.Set("message", options.message)
 	}

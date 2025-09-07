@@ -11,12 +11,12 @@ import (
 // Для вызова метода можно использовать:
 // •ключ доступа пользователя, полученный в Standalone‑приложении через Implicit Flow (требуются права доступа: groups)
 // •ключ доступа сообщества
-func (am *BoardMethods) DeleteComment(ctx context.Context, groupId uint, topicId uint, commentId string) (types.VkResponse, error) {
+func (am *BoardMethods) DeleteComment(ctx context.Context, groupId uint, topicId uint, commentId uint) (types.VkResponse, error) {
 
 	params := url.Values{}
 	params.Set("group_id", strconv.Itoa(int(groupId)))
 	params.Set("topic_id", strconv.Itoa(int(topicId)))
-	params.Set("comment_id", commentId)
+	params.Set("comment_id", strconv.Itoa(int(commentId)))
 
 	VkRequest := types.VkRequest{
 		Method: "board.deleteComment",
